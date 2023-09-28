@@ -17,13 +17,15 @@ public class SendMailController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult SendMail([FromBody] SendMailRequest request) {
-        var ( to, subject, message) = this.SendMailDestructuring(request);
+    public IActionResult SendMail([FromBody] SendMailRequest request)
+    {
+        var (to, subject, message) = this.SendMailDestructuring(request);
         _sendMailService.sendMail(to, subject, message);
         return Ok("Email sent successfully");
     }
 
-    private (string, string, string) SendMailDestructuring(SendMailRequest request) {
+    private (string, string, string) SendMailDestructuring(SendMailRequest request)
+    {
         return (request.To, request.Subject, request.Message);
     }
 }
